@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          crossorigin="anonymous">
+    <title>Mark Attendance</title>
+    <style>
+        .navbar { background-color: #34495e; }
+        .navbar .navbar-brand, .navbar .nav-link { color: #ecf0f1 !important; }
+        .navbar .nav-link:hover { color: #d1d8db !important; }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">LMS</a>
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="/admin">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="/">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h2 class="text-center">Mark Attendance</h2>
+
+    <!-- Display success message -->
+    <div class="alert alert-success" th:if="${message}" th:text="${message}"></div>
+
+    <!-- Form to mark attendance -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form id="attendanceForm" th:action="@{/mentor/attendance/mark}" method="post">
+                <!-- Display current date -->
+                <div class="mb-3">
+                    <label for="attendanceDate" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="attendanceDate" name="date" th:value="${date}" readonly/>
+                </div>
+
+                <h4>Employee List</h4>
+                <div class="list-group">
+                    <!-- Loop through employees -->
+                    <div th:each="employee : ${employees}" class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 th:text="${employee.first_name + ' ' + employee.last_name}"></h5>
+                            <p th:text="'ID: ' + ${employee.employeeId}"></p>
+                        </div>
+                        <div>
+                            <!-- Attendance status select (same name to group selections into a list) -->
+                            <select class="form-select" th:name="'attendanceStatus'" required>
+                                <option value="" disabled selected>Choose status</option>
+                                <option value="PRESENT">Present</option>
+                                <option value="ABSENT">Absent</option>
+                            </select>
+                            <!-- Employee ID input as a list (with '[]' to make it a list) -->
+                            <input type="hidden" th:name="employeeIds[]" th:value="${employee.employeeId}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary">Mark Attendance</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

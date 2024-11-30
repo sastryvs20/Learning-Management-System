@@ -53,8 +53,7 @@ public class ManageBatchService implements ManageBatchInterface {
     // Fetch mentors
     @Override
     public List<UserDetails> getAllMentors() {
-        List<UserDetails> mentors = userDetailsRepository.findByUserType("Mentor");
-        System.out.println("Fetched Mentors: " + mentors);  // Debugging log
+        List<UserDetails> mentors = userDetailsRepository.findByUserType("Mentor");// Debugging log
         return mentors;
     }
 
