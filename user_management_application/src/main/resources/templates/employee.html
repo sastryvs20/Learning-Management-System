@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <title>Home - LMS</title>
+    <style>
+        .navbar {
+            background-color: #34495e;
+        }
+
+        .navbar .navbar-brand,
+        .navbar .nav-link {
+            color: #ecf0f1 !important;
+        }
+
+        .navbar .nav-link:hover {
+            color: #d1d8db !important;
+        }
+
+        .btn-navy {
+            background-color: #34495e;
+            color: #ecf0f1;
+        }
+
+        .btn-navy:hover {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .dashboard-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 70vh;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .col-md-4 {
+            margin: 0;
+        }
+
+        /* Add watermark text to search input */
+        .form-control::placeholder {
+            color: #95a5a6; /* Light gray color */
+            font-style: italic;
+        }
+
+    </style>
+</head>
+<body>
+
+<!--------------------------------------------NAVIGATION BAR----------------------------------------------------------->
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">LMS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex ms-auto me-3" th:action="@{/employee/search}" method="get">
+                <input class="form-control me-2" type="search" name="name" placeholder="Search Employee" aria-label="Search" required>
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h1 class="text-center">Welcome, <span th:text="${userName}">User</span>!</h1>
+
+<div class="dashboard-container">
+    <div class="card-container">
+        <div class="col-md-4">
+            <div class="card p-3">
+                <a th:href="@{/employee/manageAddress}" class="btn btn-navy w-100 mb-2">Address</a>
+                <a th:href="@{/employee/BankDetails}" class="btn btn-navy w-100 mb-2">Bank Details</a>
+                <a th:href="@{/employee/BatchEnroll}" class="btn btn-navy w-100 mb-2">Enroll In Batch</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3">
+                <a th:href="@{/employee/EmployeeExperience}" class="btn btn-navy w-100 mb-2">Experience</a>
+                <a th:href="@{/employee/EmployeeContactInfo}" class="btn btn-navy w-100 mb-2">Contact Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
