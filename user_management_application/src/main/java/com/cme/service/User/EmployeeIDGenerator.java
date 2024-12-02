@@ -29,11 +29,11 @@ public class EmployeeIDGenerator implements IdentifierGenerator {
     // Helper method to return the correct prefix based on user_type
     private String getPrefixByUserType(String userType) {
         switch (userType.toUpperCase()) {
-            case "EMP":
+            case "EMPLOYEE":
                 return "EM";  // Employee
-            case "AD":
+            case "ADMIN":
                 return "AD";  // Admin
-            case "ME":
+            case "MENTOR":
                 return "ME";  // Mentor
             default:
                 return "UN";  // Default if the user type doesn't match any of the cases
